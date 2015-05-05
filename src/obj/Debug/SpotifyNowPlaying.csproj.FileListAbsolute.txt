@@ -1,0 +1,17 @@
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.Form1.resources
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.Properties.Resources.resources
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\SpotifyNowPlaying.csproj.GenerateResource.Cache
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\Spotify_NowPlaying.exe.config
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\Spotify_NowPlaying.exe
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\Spotify_NowPlaying.pdb
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\SpotifyAPI.dll
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\SpotifyAPI.xml
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.exe
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.pdb
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.Form1.af.resources
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\Spotify_NowPlaying.Form1.en.resources
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\af\Spotify_NowPlaying.resources.dll
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\bin\Debug\en\Spotify_NowPlaying.resources.dll
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\af\Spotify_NowPlaying.resources.dll
+C:\Users\Emilio\Documents\GitHub\spotify-nowplaying\src\obj\Debug\en\Spotify_NowPlaying.resources.dll

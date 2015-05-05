@@ -20,8 +20,11 @@ namespace Spotify_NowPlaying
         SpotifyLocalAPIClass spotify;
         SpotifyMusicHandler mh;
         SpotifyEventHandler eh;
+        String textFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
         public Form1()
         {
+           
             InitializeComponent();
             spotify = new SpotifyLocalAPIClass();
             if (!SpotifyLocalAPIClass.IsSpotifyRunning())
@@ -61,9 +64,7 @@ namespace Spotify_NowPlaying
         private async void Form1_Load(object sender, EventArgs e)
         {
             spotify.Update();
-            progressBar1.Maximum = (int)mh.GetCurrentTrack().GetLength() * 100;
             pictureBox1.Image = await spotify.GetMusicHandler().GetCurrentTrack().GetAlbumArtAsync(AlbumArtSize.SIZE_160);
-            pictureBox2.Image = await spotify.GetMusicHandler().GetCurrentTrack().GetAlbumArtAsync(AlbumArtSize.SIZE_640);
 
             linkLabel1.Text = mh.GetCurrentTrack().GetTrackName();
             linkLabel1.LinkClicked += (senderTwo, args) => Process.Start(mh.GetCurrentTrack().GetTrackURI());
@@ -71,40 +72,29 @@ namespace Spotify_NowPlaying
             linkLabel2.LinkClicked += (senderTwo, args) => Process.Start(mh.GetCurrentTrack().GetArtistURI());
             linkLabel3.Text = mh.GetCurrentTrack().GetAlbumName();
             linkLabel3.LinkClicked += (senderTwo, args) => Process.Start(mh.GetCurrentTrack().GetAlbumURI());
-
-            label9.Text = mh.IsPlaying().ToString();
-            label11.Text = ((int)(mh.GetVolume() * 100)).ToString();
-            label7.Text = mh.IsAdRunning().ToString();
-
+            printSong(mh.GetCurrentTrack());
             eh.OnTrackChange += new SpotifyEventHandler.TrackChangeEventHandler(trackchange);
-            eh.OnTrackTimeChange += new SpotifyEventHandler.TrackTimeChangeEventHandler(timechange);
-            eh.OnPlayStateChange += new SpotifyEventHandler.PlayStateEventHandler(playstatechange);
-            eh.OnVolumeChange += new SpotifyEventHandler.VolumeChangeEventHandler(volumechange);
             eh.SetSynchronizingObject(this);
             eh.ListenForEvents(true);
         }
-        private void volumechange(VolumeChangeEventArgs e)
-        {
-            label11.Text = ((int)(mh.GetVolume() * 100)).ToString();
-        }
-        private void playstatechange(PlayStateEventArgs e)
-        {
-            label9.Text = e.playing.ToString();
-        }
         private async void trackchange(TrackChangeEventArgs e)
         {
-            progressBar1.Maximum = (int)mh.GetCurrentTrack().GetLength()*100;
             linkLabel1.Text = e.new_track.GetTrackName();
             linkLabel2.Text = e.new_track.GetArtistName();
             linkLabel3.Text = e.new_track.GetAlbumName();
             pictureBox1.Image = await e.new_track.GetAlbumArtAsync(AlbumArtSize.SIZE_160);
-            pictureBox2.Image = await e.new_track.GetAlbumArtAsync(AlbumArtSize.SIZE_640);
-            label7.Text = mh.IsAdRunning().ToString();
+            printSong(e.new_track);
+
         }
-        private void timechange(TrackTimeChangeEventArgs e)
+
+        private void printSong(Track t)
         {
-            label4.Text = formatTime(e.track_time) + "/" + formatTime(mh.GetCurrentTrack().GetLength());
-            progressBar1.Value = (int)e.track_time*100;
+            String spaceChar;
+            if (checkBox1.Checked) { spaceChar = "    "; }
+            else { spaceChar = ""; }
+
+            string nowPlaying = t.GetTrackName() + tbContext.Text + t.GetArtistName() + spaceChar;
+            System.IO.File.WriteAllText(textFile + @"\NowPlaying.txt", nowPlaying);
         }
         private String formatTime(double sec)
         {
@@ -134,20 +124,19 @@ namespace Spotify_NowPlaying
         {
             mh.Skip();
         }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void Form1_Resize(object sender, EventArgs e)
         {
-            //Not working yet
-            //if (SpotifyAPI.IsValidSpotifyURI(textBox1.Text))
-            mh.PlayURL(textBox1.Text, tbContext.Text);
+            if (FormWindowState.Minimized == WindowState)
+                Hide();
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-                mh.Mute();
-            else
-                mh.UnMute();
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+        private void menuItem1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
